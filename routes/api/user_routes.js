@@ -2,7 +2,7 @@ const user_route = require('express').Router()
 const { User } = require('../../models')
 
 
-//Create
+//Create a user
 user_route.post('/users', async (req, res) => {
     try {
       const newUser = await User.create(req.body);
@@ -14,7 +14,7 @@ user_route.post('/users', async (req, res) => {
       }
   });
   
-  //Get all
+  //Get all users
   user_route.get('/users', async (req, res) => {
     try {
       const allUsers = await User.find();
@@ -25,7 +25,7 @@ user_route.post('/users', async (req, res) => {
     }
   });
   
-  //Get User by ID
+  //Get a User by ID
   user_route.get('/users/:id', async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
@@ -39,7 +39,7 @@ user_route.post('/users', async (req, res) => {
     }
   });
   
-  //Update User by ID
+  //Update a User by ID
   user_route.put('/users/:id', async (req, res) => {
     try {
       const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -53,7 +53,7 @@ user_route.post('/users', async (req, res) => {
     }
   });
   
-  //Delete User by ID
+  //Delete a User by ID
   user_route.delete('/users/:id', async (req, res) => {
     try {
       const user = await User.findByIdAndRemove(req.params.id);
@@ -68,18 +68,15 @@ user_route.post('/users', async (req, res) => {
   });
 
 
-  //need to update friends
-  
-  //add friend to user
+  //Add a friend to user
 user_route.post('/users/:userId/friends/:friendId', async (req, res) => {
     try {
         const userId = req.params.userId
         const friendId = req.params.friendId
         const addFriend = await User.findOneAndUpdate(
-            { _id: userId },//find user by id
-            { $addToSet: { friends: friendId } }, //set friendId into friends array 
-            //$addToSet is used to prevent duplicate friends
-            { new: true } //return updated user
+            { _id: userId },
+            { $addToSet: { friends: friendId } }, 
+            { new: true }
         )
         res.status(202).json(addFriend)
     } catch (error) {
@@ -88,7 +85,7 @@ user_route.post('/users/:userId/friends/:friendId', async (req, res) => {
     }
 })
 
-//remove friend from user
+//Remove a friend from user
 user_route.delete('/users/:userId/friends/:friendId', async (req, res) => {
     try {
         const userId = req.params.userId
@@ -98,7 +95,6 @@ user_route.delete('/users/:userId/friends/:friendId', async (req, res) => {
             { $pull: { friends: friendId } },
             { new: true }
         )
-        //return updated user
         res.status(202).json({ message: 'Friend removed' })
     } catch (error) {
         console.log(error)
