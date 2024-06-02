@@ -14,6 +14,7 @@
 ## Description
 This Social Media Network API is designed to manage backend routes for a social media platform. The API allows for storing and managing user data, thoughts, reactions, and relational data between users such as friend lists and user thoughts. Built using modern web technologies, this API provides a robust backend service for social media applications.
 
+Click here for a visual walkthrough. [Link](https://drive.google.com/file/d/1ITklAnZw_3efdt6PHZFi8oHJJLD52XPh/view?usp=sharing)
 ## Visuals
 ![image](assets/insomia.png)
 ![image](assets/mongoose.png)
