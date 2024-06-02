@@ -2,7 +2,7 @@ const thought_route = require('express').Router()
 const { User, Thought } = require('../../models')
 
 
-//create
+//Create a thought
 thought_route.post('/thoughts', async (req, res) => {
   try {
     const { userId, thoughtText } = req.body;
@@ -23,7 +23,7 @@ thought_route.post('/thoughts', async (req, res) => {
   }
 });
 
-//get all thoughts
+//Get all thoughts
 thought_route.get('/thoughts', async (req, res) => {
   try {
     const allThoughts = await Thought.find();
@@ -35,7 +35,7 @@ thought_route.get('/thoughts', async (req, res) => {
   }
 });
 
-//get thought by ID
+//Get thought by ID
 thought_route.get('/thoughts/:id', async (req, res) => {
   try {
     const thought = await Thought.findById(req.params.id);
@@ -49,7 +49,7 @@ thought_route.get('/thoughts/:id', async (req, res) => {
   }
 });
 
-//update thought by ID
+//Update thought by ID
 thought_route.put('/thoughts/:id', async (req, res) => {
   try {
     const updatedThought = await Thought.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -77,9 +77,8 @@ thought_route.delete('/thoughts/:id', async (req, res) => {
   }
 });
 
-// REACTIONS
 
-//create a new reaction
+//Create a new reaction
 thought_route.post('/thoughts/:thoughtId/reactions', async (req, res) => {
     try {
         const thoughtId = req.params.thoughtId
@@ -97,7 +96,7 @@ thought_route.post('/thoughts/:thoughtId/reactions', async (req, res) => {
       }
 })
 
-//delete reaction by id
+//Delete reaction by id
 thought_route.delete('/thoughts/:thoughtId/reactions/:reactionId', async (req, res) => {
     try {
         const thoughtId = req.params.thoughtId
